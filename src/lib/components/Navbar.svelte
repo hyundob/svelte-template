@@ -1,18 +1,30 @@
 <script lang="ts">
-    import { isLoggedIn } from '$lib/stores/auth';
+    import { isLoggedIn, login, logout } from '$lib/stores/auth';
     import { navbar_items } from '$lib/navigation';
     import { onMount } from 'svelte';
-    import { get } from 'svelte/store';
 
     let mobileMenuOpen = false;
 
     function handleLogin() {
-        isLoggedIn.set(true);
+        const username = prompt('아이디를 입력하세요');
+        const password = prompt('비밀번호를 입력하세요');
+
+        if (username && password) {
+            login(username, password).then(success => {
+                if (!success) alert('로그인 실패!');
+            });
+        }
     }
 
     function handleLogout() {
-        isLoggedIn.set(false);
+        logout();
     }
+
+    // 새로고침 시 로그인 유지
+    onMount(() => {
+        const token = localStorage.getItem('accessToken');
+        if (token) isLoggedIn.set(true);
+    });
 </script>
 
 <nav class="bg-white sticky top-0 z-50 shadow">
