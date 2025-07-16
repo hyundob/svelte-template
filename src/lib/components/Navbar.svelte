@@ -44,14 +44,14 @@
             {#if $isLoggedIn}
                 <button
                         on:click={handleLogout}
-                        class="text-stone-800 hover:text-red-500 font-semibold"
+                        class="text-stone-800 hover:text-red-500 font-semibold w-[80px] text-center"
                 >
                     로그아웃
                 </button>
             {:else}
                 <button
                         on:click={handleLogin}
-                        class="text-emerald-600 hover:text-emerald-800 font-semibold"
+                        class="text-emerald-600 hover:text-emerald-800 font-semibold w-[80px] text-center"
                 >
                     로그인
                 </button>
